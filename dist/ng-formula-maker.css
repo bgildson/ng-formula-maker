@@ -1,0 +1,119 @@
+/*
+ ngFormulaMaker v0.0.1
+ (c) 2015 Gildson
+*/
+.formula-maker * {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.formula-maker {
+  border: 1px solid #DDD;
+  display: table;
+  min-width: 500px;
+  color: #444;
+  margin: 10px;
+  border-radius: 3px;
+}
+.formula-maker ul {
+  list-style: none;
+}
+.formula-area {
+  border: 1px solid #DDD;
+  padding: 5px;
+  min-height: 50px;
+}
+.formula-area ul {
+  list-style: none;
+  display: table;
+}
+.formula-area ul li {
+  border: 1px solid #DDD;
+  display: table;
+  background: #EEE;
+  margin: 0 5px 5px 0;
+  padding: 5px 10px;
+  float: left;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.formula-area ul li:hover {
+  background: #DDD;
+}
+.formula-area ul li:active {
+  background: #CCC;
+}
+.formula-maker-selected {
+  background: #CCC !important;
+}
+.search-area {
+  cursor: pointer;
+}
+.search-area > ul {
+  display: block;
+  position: relative;
+  right: 0;
+}
+.search-area > ul > li {
+  float: left;
+  border: 1px solid #DDD;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  background: #EEE;
+  display: block;
+  line-height: 30px;
+}
+.search-area > ul > li:hover {
+  background: #DDD;
+}
+.search-area > ul > li:active {
+  background: #CCC;
+}
+.search-area > ul > li:nth-child(1) {
+  padding: 0;
+  width: calc(100% - 340px);
+}
+.search-area > ul > li:nth-child(1):hover {
+  border-color: #7DA8CE;
+}
+.search-area > ul > li:nth-child(2) {
+  font-weight: bold;
+  width: 70px;
+}
+.search-area > ul > li:nth-child(3), .search-area > ul > li:nth-child(4) {
+  width: 45px;
+}
+.search-area > ul > li:nth-child(1) input {
+  height: 28px;
+  border: none;
+  padding: 0 5px;
+  width: 100%;
+  display: block;
+}
+.search-results {
+  position: absolute;
+  background: #FFF;
+  border: 1px solid #DDD;
+  min-width: 490px;
+  width: calc(80%);
+  max-height: 150px;
+  overflow: auto;
+}
+.search-results li {
+  padding: 0 10px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 30px;
+}
+.search-results li:hover {
+  background: #EEE;
+}
+.search-disabled {
+  background: #CCC !important;
+  color: #666;
+  cursor: wait;
+}
