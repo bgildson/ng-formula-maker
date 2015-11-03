@@ -31,7 +31,7 @@
 }
 .formula-area ul li {
   border: 1px solid #DDD;
-  display: table;
+  display: block;
   background: #EEE;
   margin: 0 5px 5px 0;
   padding: 5px 10px;
