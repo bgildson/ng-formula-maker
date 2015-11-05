@@ -56,13 +56,14 @@ angular.module('ng-formula-maker', [])
               .then(
                 function(response){
                   scope.results = response.data.data;
-                  scope.results_toggle()
-                  scope.searching = false;
                 },
                 function(response){
                   scope.results = [];
+                })
+              .finally(function(){
+                  scope.results_toggle();
                   scope.searching = false;
-                });
+              });
           }
         }
 
@@ -84,7 +85,7 @@ angular.module('ng-formula-maker', [])
         scope.result_select = function(result){
           scope.result_selected = result;
           scope.search_text = result.description;
-          scope.results_toggle();
+          scope.results_showing = false;
         }
 
         scope.result_clear = function(){
@@ -131,9 +132,10 @@ angular.module('ng-formula-maker', [])
           element[0].querySelector('.search-area ul li:nth-child(1) input').focus();
         });
 
+
         $document.on('keydown', function(e){
           if(e.keyCode == 27 && scope.results_showing){
-            scope.results_toggle();
+            scope.results_showing = false;
             scope.$apply();
           }
         });
