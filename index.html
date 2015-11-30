@@ -105,9 +105,18 @@
       $scope.search = function(search_text){
         return {'then': function(funcOK, funcERRO){
           if(search_text.length > 0){
-            funcOK({'data': {'data': $scope._search(search_text, $scope.results, 'description')}});
+            console.log(funcOK);
+            var res = $scope._search(search_text, $scope.results, 'description');
+            funcOK({'data': {'data': res}});
+            return {'finally': function(funcFINALLY){
+              funcFINALLY();
+            }};
           }else{
+            console.log(funcERRO);
             funcERRO({'data': {'data': []}});
+            return {'finally': function(funcFINALLY){
+              funcFINALLY();
+            }};
           }
         }};
       }
