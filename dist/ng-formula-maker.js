@@ -47,6 +47,7 @@ angular.module('ng-formula-maker', [])
         scope.result_selected = {};
         scope.search_text = "";
         scope.searching = false;
+        scope.insert_position = -1;
 
         scope.search = function(){
           if(!scope.searching && scope.emSearch){
@@ -69,14 +70,19 @@ angular.module('ng-formula-maker', [])
 
         scope.formula_add = function(item){
           if(item['description'] != undefined && item['value'] != undefined){
-            scope.formula.push(angular.copy(item));
+            var item_selected = scope.item_selected();
+            if(item_selected == -1){
+              scope.formula.push(angular.copy(item));
+            }else{
+              scope.formula.splice(item_selected, 0, angular.copy(item));
+            }
           }
           scope.result_clear();
         }
 
         scope.formula_get = function(){
           var exp = '';
-          for(var n = 0; n < scope.formula.length; n++){
+          for(var n=0;n<scope.formula.length;n++){
             exp += scope.formula[n].value + " ";
           }
           return exp.replace(/^\s+|\s+$/g,'');
@@ -101,8 +107,25 @@ angular.module('ng-formula-maker', [])
         }
 
         scope.item_select = function(item){
-          item.selected = !item.selected;
+          var selected = item.selected;
+          scope.item_deselect_all();
+          item.selected = !selected;
           scope.result_clear();
+        }
+
+        scope.item_selected = function(){
+          for(var n=0;n<scope.formula.length;n++){
+            if(scope.formula[n].selected){
+              return n;
+            }
+          }
+          return -1;
+        }
+
+        scope.item_deselect_all = function(){
+          for(var n=0;n<scope.formula.length;n++){
+            scope.formula[n].selected = false;
+          }
         }
 
         scope.item_add = function(){
@@ -113,10 +136,9 @@ angular.module('ng-formula-maker', [])
         }
 
         scope.item_delete = function(){
-          for(var n = scope.formula.length -1; n >= 0; n--){
-            if(scope.formula[n].selected){
-              scope.formula.splice(n, 1);
-            }
+          var item_selected = scope.item_selected();
+          if(item_selected>=0){
+            scope.formula.splice(item_selected, 1);
           }
           scope.result_clear();
         }
@@ -131,7 +153,6 @@ angular.module('ng-formula-maker', [])
         angular.element(element[0].querySelector('.formula-area')).on('click', function(e){
           element[0].querySelector('.search-area ul li:nth-child(1) input').focus();
         });
-
 
         $document.on('keydown', function(e){
           if(e.keyCode == 27 && scope.results_showing){
